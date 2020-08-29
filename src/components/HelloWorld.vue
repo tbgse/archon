@@ -1,8 +1,7 @@
 <template>
-  <h1>{{ msg }}</h1>
-  <button @click="count++">count is: {{ count }}</button>
-  <p>A random number: {{randomNumber}}</p>
-  <p>Edit <code>components/HelloWorld.vue</code> to test hot module replacement.</p>
+  <router-view v-slot="{ Component }">
+      <component :is="Component" />
+  </router-view>
 </template>
 
 <script>
@@ -15,6 +14,9 @@ export default {
   },
   mounted () {
     this.randomNumber = Math.random();
+  },
+  serverPrefetch() {
+    console.log('running prefetch');
   },
   data() {
     return {

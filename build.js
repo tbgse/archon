@@ -12,10 +12,10 @@ const replace = require('@rollup/plugin-replace');
   })
 
 
-  const serverResult = await ssrBuild({
+  await ssrBuild({
     outDir: 'dist/server',
-    rollupPluginVueOptions: {
-      target: 'node'
+    rollupOutputOptions: {
+      exports: 'default'
     },
     rollupInputOptions: {
       plugins: [
