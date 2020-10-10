@@ -7,8 +7,6 @@ const express = require('express');
 const path = require('path');
 const server = express();
 
-server.use('/_assets', express.static(path.join(__dirname, '../../client/_assets')));
-
 server.get('*', (req, res) => {
   const router = createRouter();
   const app = createSSRApp(App);
@@ -19,13 +17,12 @@ server.get('*', (req, res) => {
       res.end();
       return;
     }
-    ;(async () => {
-
+    ; (async () => {
       const html = await renderer.renderToString(app)
-      res.end(`__HTML__`)
+      res.end(html);
     })()
   });
 })
 
-console.log('started server...');
+console.log('started server on port 8080');
 server.listen(8080);
