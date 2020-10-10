@@ -4,5 +4,8 @@ exports.handler = async event => {
   return {
     statusCode: 200,
     body: `Hello ${subject}!`,
+    headers: {
+      'Cache-Control': 'max-age=365000000,immutable',
+    },
   }
 }
