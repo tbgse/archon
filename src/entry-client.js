@@ -8,6 +8,8 @@ const router = createRouter('client');
 const app = createSSRApp(App);
 app.use(router);
 
-router.isReady().then(() => {
-  app.mount('#app', true);
-});
+setTimeout(() => {
+  router.isReady().then(() => {
+    app.mount('#app', true);
+  });
+}, 3000);

@@ -3,7 +3,7 @@ const replace = require('@rollup/plugin-replace');
 
 ;(async () => {
   const clientResult = await build({
-    outDir: 'dist/client',
+    outDir: 'dist',
     rollupInputOptions: {
       input: './src/entry-client.js'
     },
@@ -13,7 +13,8 @@ const replace = require('@rollup/plugin-replace');
   await ssrBuild({
     outDir: 'functions',
     rollupOutputOptions: {
-      namespaceToStringTag: true
+      namespaceToStringTag: true,
+      inlineDynamicImports: true
     },
     rollupInputOptions: {
       plugins: [

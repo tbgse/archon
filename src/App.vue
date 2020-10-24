@@ -1,4 +1,9 @@
 <template>
+  <div :class='`label ${ready ? "positive" : ""}`'>
+    <div v-if='ready'>Hydration complete</div>
+    <div v-else>Hydrating...</div>
+  </div>
+  <div>Hydration is being delayed by 3 seconds for debugging purposes</div>
   <h1>A small state test for rehydration: {{count}}</h1>
   <button @click='count++'>Add to count</button>
   <nav>
@@ -17,8 +22,13 @@ export default {
   name: 'App',
   data () {
     return {
-      count: 0
+      count: 0,
+      ready: false
     }
+  },
+  mounted () {
+    console.log('mounted!!');
+    this.ready = true;
   }
 }
 </script>
@@ -35,4 +45,15 @@ nav {
   margin-top: 20px;
   border-radius: 4px;
 }
+
+.label {
+  padding: 10px 40px;
+  border-radius: 4px;
+  background: #ccc;
+  display: inline-block;
+}
+.label.positive {
+  background: limegreen;
+}
+
 </style>
