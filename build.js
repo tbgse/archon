@@ -25,5 +25,5 @@ const replace = require('@rollup/plugin-replace');
     },
   })
 
-  process.exit();
+  process.exit(0);
 })()
