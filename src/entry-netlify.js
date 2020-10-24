@@ -3,29 +3,25 @@ import renderer from '@vue/server-renderer';
 import App from './App.vue'
 import createRouter from './router'
 
-const express = require('express');
-const path = require('path');
-const server = express();
-
-server.use('/_assets', express.static(path.join(__dirname, '../client/_assets')));
-
-server.get('*', (req, res) => {
+// functions/hello.js
+exports.handler = async event => {
   const router = createRouter();
   const app = createSSRApp(App);
   app.use(router);
-  router.push(req.url)
-  router.isReady().then(() => {
-    if (router.currentRoute.value.matched.length === 0) {
-      res.end();
-      return;
+  router.push(event.path);
+  await router.isReady()
+  
+  if (router.currentRoute.value.matched.length === 0) {
+    return {
+      statusCode: 404,
+      body: 'yikes, not found!'
     }
-    ;(async () => {
+  }
 
-      const html = await renderer.renderToString(app)
-      res.end(`__HTML__`)
-    })()
-  });
-})
+  const html = await renderer.renderToString(app)
 
-console.log('started server...');
-server.listen(8080);
+  return {
+    statusCode: 200,
+    body: `__HTML__`
+  }
+}

@@ -11,7 +11,7 @@ const replace = require('@rollup/plugin-replace');
 
 
   await ssrBuild({
-    outDir: 'dist/server',
+    outDir: 'functions',
     rollupOutputOptions: {
       namespaceToStringTag: true
     },
@@ -21,7 +21,7 @@ const replace = require('@rollup/plugin-replace');
           __HTML__: clientResult.html.replace('<div id="app">', '<div id="app" data-server-rendered="true">${html}')
         })
       ],
-      input: './src/entry-server.js'
+      input: './src/entry-netlify.js'
     },
   })
 
