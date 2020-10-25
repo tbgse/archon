@@ -1,16 +1,13 @@
 <template>
-  <h1>This is the homepage</h1>
-  <div>{{test}}</div>
+  <h1>Sku {{name}}</h1>
 </template>
 
 <script>
-
-
 export default {
-  name: 'Homepage',
+  name: 'sku',
   data () {
     return {
-      test: 'prefetch is not working'
+      name: ''
     }
   },
   serverPrefetch () {
@@ -19,8 +16,8 @@ export default {
   },
   methods: {
     setInitialData () {
-      this.test = 'prefetch is working';
       console.log(this.$route);
+      this.name = this.$route.params.name;
     }
   }
 }

@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "node build.js",
     "build-functions": "netlify-lambda build functions-raw",
-    "special-build": "vite build --ssr",
+    "build-server": "node buildServer.js",
     "serve": "node functions/entry-server"
   },
   "dependencies": {
