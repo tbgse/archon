@@ -8,7 +8,7 @@
     "build": "node build.js",
     "build-functions": "netlify-lambda build functions-raw",
     "special-build": "vite build --ssr",
-    "serve": "node dist/server/entry-server"
+    "serve": "node functions/entry-server"
   },
   "dependencies": {
     "vue": "^3.0.0",

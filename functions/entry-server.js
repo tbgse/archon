@@ -20,6 +20,7 @@ var script = {
 };
 const _withId = /* @__PURE__ */ vue.withScopeId("data-v-7ba5bd90");
 const ssrRender = /* @__PURE__ */ _withId(function ssrRender2(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  const _component_router_link = vue.resolveComponent("router-link");
   const _component_router_view = vue.resolveComponent("router-view");
   _push(`<!--[--><div class="${renderer.ssrRenderClass(`label ${$data.ready ? "positive" : ""}`)}" data-v-7ba5bd90>`);
   if ($data.ready) {
@@ -27,11 +28,44 @@ const ssrRender = /* @__PURE__ */ _withId(function ssrRender2(_ctx, _push, _pare
   } else {
     _push(`<div data-v-7ba5bd90>Hydrating...</div>`);
   }
-  _push(`</div><div data-v-7ba5bd90>Hydration is being delayed by 3 seconds for debugging purposes</div><h1 data-v-7ba5bd90>A small state test for rehydration: ${renderer.ssrInterpolate($data.count)}</h1><button data-v-7ba5bd90>Add to count</button><!-- <nav>
-    <router-link to="/">Go to Home</router-link>
-    <router-link to="/a">Go to A</router-link>
-    <router-link to="/b">Go to B</router-link>
-  </nav> --><h1 data-v-7ba5bd90>Below is the currently rendered route:</h1><div data-v-7ba5bd90>test 123</div><div data-v-7ba5bd90>no routes at the moment...</div>`);
+  _push(`</div><div data-v-7ba5bd90>Hydration is being delayed by 3 seconds for debugging purposes</div><h1 data-v-7ba5bd90>A small state test for rehydration: ${renderer.ssrInterpolate($data.count)}</h1><button data-v-7ba5bd90>Add to count</button><nav data-v-7ba5bd90>`);
+  _push(renderer.ssrRenderComponent(_component_router_link, {to: "/"}, {
+    default: _withId((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`Go to Home`);
+      } else {
+        return [
+          vue.createTextVNode("Go to Home")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(renderer.ssrRenderComponent(_component_router_link, {to: "/a"}, {
+    default: _withId((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`Go to A`);
+      } else {
+        return [
+          vue.createTextVNode("Go to A")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(renderer.ssrRenderComponent(_component_router_link, {to: "/b"}, {
+    default: _withId((_, _push2, _parent2, _scopeId) => {
+      if (_push2) {
+        _push2(`Go to B`);
+      } else {
+        return [
+          vue.createTextVNode("Go to B")
+        ];
+      }
+    }),
+    _: 1
+  }, _parent));
+  _push(`</nav><h1 data-v-7ba5bd90>Below is the currently rendered route:</h1>`);
   _push(renderer.ssrRenderComponent(_component_router_view, null, {
     default: _withId(({Component}, _push2, _parent2, _scopeId) => {
       if (_push2) {
@@ -76,24 +110,24 @@ function applyToParams(fn, params) {
 let noop = () => {
 };
 const TRAILING_SLASH_RE = /\/$/;
-const removeTrailingSlash = (path) => path.replace(TRAILING_SLASH_RE, "");
+const removeTrailingSlash = (path2) => path2.replace(TRAILING_SLASH_RE, "");
 function parseURL(parseQuery2, location2, currentLocation = "/") {
-  let path, query = {}, searchString = "", hash = "";
+  let path2, query = {}, searchString = "", hash = "";
   const searchPos = location2.indexOf("?");
   const hashPos = location2.indexOf("#", searchPos > -1 ? searchPos : 0);
   if (searchPos > -1) {
-    path = location2.slice(0, searchPos);
+    path2 = location2.slice(0, searchPos);
     searchString = location2.slice(searchPos + 1, hashPos > -1 ? hashPos : location2.length);
     query = parseQuery2(searchString);
   }
   if (hashPos > -1) {
-    path = path || location2.slice(0, hashPos);
+    path2 = path2 || location2.slice(0, hashPos);
     hash = location2.slice(hashPos, location2.length);
   }
-  path = resolveRelativePath(path != null ? path : location2, currentLocation);
+  path2 = resolveRelativePath(path2 != null ? path2 : location2, currentLocation);
   return {
-    fullPath: path + (searchString && "?") + searchString + hash,
-    path,
+    fullPath: path2 + (searchString && "?") + searchString + hash,
+    path: path2,
     query,
     hash
   };
@@ -213,9 +247,9 @@ function scrollToPosition(position) {
     window.scrollTo(scrollToOptions.left != null ? scrollToOptions.left : window.pageXOffset, scrollToOptions.top != null ? scrollToOptions.top : window.pageYOffset);
   }
 }
-function getScrollKey(path, delta) {
+function getScrollKey(path2, delta) {
   const position = history.state ? history.state.position - delta : -1;
-  return position + path;
+  return position + path2;
 }
 const scrollPositions = new Map();
 function saveScrollPosition(key, scrollPosition) {
@@ -236,8 +270,8 @@ function createCurrentLocation(base, location2) {
       pathFromHash = "/" + pathFromHash;
     return stripBase(pathFromHash, "");
   }
-  const path = stripBase(pathname, base);
-  return path + search + hash;
+  const path2 = stripBase(pathname, base);
+  return path2 + search + hash;
 }
 function useHistoryListeners(base, historyState, currentLocation, replace) {
   let listeners = [];
@@ -553,8 +587,8 @@ function tokensToParser(segments, extraOptions) {
   else if (options.strict)
     pattern += "(?:/|$)";
   const re = new RegExp(pattern, options.sensitive ? "" : "i");
-  function parse(path) {
-    const match = path.match(re);
+  function parse(path2) {
+    const match = path2.match(re);
     const params = {};
     if (!match)
       return null;
@@ -566,15 +600,15 @@ function tokensToParser(segments, extraOptions) {
     return params;
   }
   function stringify(params) {
-    let path = "";
+    let path2 = "";
     let avoidDuplicatedSlash = false;
     for (const segment of segments) {
-      if (!avoidDuplicatedSlash || !path.endsWith("/"))
-        path += "/";
+      if (!avoidDuplicatedSlash || !path2.endsWith("/"))
+        path2 += "/";
       avoidDuplicatedSlash = false;
       for (const token of segment) {
         if (token.type === 0) {
-          path += token.value;
+          path2 += token.value;
         } else if (token.type === 1) {
           const {value, repeatable, optional} = token;
           const param = value in params ? params[value] : "";
@@ -583,18 +617,18 @@ function tokensToParser(segments, extraOptions) {
           const text = Array.isArray(param) ? param.join("/") : param;
           if (!text) {
             if (optional) {
-              if (path.endsWith("/"))
-                path = path.slice(0, -1);
+              if (path2.endsWith("/"))
+                path2 = path2.slice(0, -1);
               else
                 avoidDuplicatedSlash = true;
             } else
               throw new Error(`Missing required param "${value}"`);
           }
-          path += text;
+          path2 += text;
         }
       }
     }
-    return path;
+    return path2;
   }
   return {
     re,
@@ -636,13 +670,13 @@ const ROOT_TOKEN = {
   value: ""
 };
 const VALID_PARAM_RE = /[a-zA-Z0-9_]/;
-function tokenizePath(path) {
-  if (!path)
+function tokenizePath(path2) {
+  if (!path2)
     return [[]];
-  if (path === "/")
+  if (path2 === "/")
     return [[ROOT_TOKEN]];
-  if (!path.startsWith("/")) {
-    throw new Error(`Invalid path "${path}"`);
+  if (!path2.startsWith("/")) {
+    throw new Error(`Invalid path "${path2}"`);
   }
   function crash(message) {
     throw new Error(`ERR (${state})/"${buffer}": ${message}`);
@@ -686,8 +720,8 @@ function tokenizePath(path) {
   function addCharToBuffer() {
     buffer += char;
   }
-  while (i < path.length) {
-    char = path[i++];
+  while (i < path2.length) {
+    char = path2[i++];
     if (char === "\\" && state !== 2) {
       previousState = state;
       state = 4;
@@ -793,11 +827,11 @@ function createRouterMatcher(routes, globalOptions) {
     let matcher;
     let originalMatcher;
     for (const normalizedRecord of normalizedRecords) {
-      let {path} = normalizedRecord;
-      if (parent && path[0] !== "/") {
+      let {path: path2} = normalizedRecord;
+      if (parent && path2[0] !== "/") {
         let parentPath = parent.record.path;
         let connectingSlash = parentPath[parentPath.length - 1] === "/" ? "" : "/";
-        normalizedRecord.path = parent.record.path + (path && connectingSlash + path);
+        normalizedRecord.path = parent.record.path + (path2 && connectingSlash + path2);
       }
       matcher = createRouteRecordMatcher(normalizedRecord, parent, options);
       if (originalRecord) {
@@ -856,7 +890,7 @@ function createRouterMatcher(routes, globalOptions) {
   function resolve(location2, currentLocation) {
     let matcher;
     let params = {};
-    let path;
+    let path2;
     let name;
     if ("name" in location2 && location2.name) {
       matcher = matcherMap.get(location2.name);
@@ -866,12 +900,12 @@ function createRouterMatcher(routes, globalOptions) {
         });
       name = matcher.record.name;
       params = assign(paramsFromLocation(currentLocation.params, matcher.keys.filter((k) => !k.optional).map((k) => k.name)), location2.params);
-      path = matcher.stringify(params);
+      path2 = matcher.stringify(params);
     } else if ("path" in location2) {
-      path = location2.path;
-      matcher = matchers.find((m) => m.re.test(path));
+      path2 = location2.path;
+      matcher = matchers.find((m) => m.re.test(path2));
       if (matcher) {
-        params = matcher.parse(path);
+        params = matcher.parse(path2);
         name = matcher.record.name;
       }
     } else {
@@ -883,7 +917,7 @@ function createRouterMatcher(routes, globalOptions) {
         });
       name = matcher.record.name;
       params = assign({}, currentLocation.params, location2.params);
-      path = matcher.stringify(params);
+      path2 = matcher.stringify(params);
     }
     const matched = [];
     let parentMatcher = matcher;
@@ -893,7 +927,7 @@ function createRouterMatcher(routes, globalOptions) {
     }
     return {
       name,
-      path,
+      path: path2,
       params,
       matched,
       meta: mergeMetaFields(matched)
@@ -1653,25 +1687,40 @@ function createRouter$1(type) {
     routes: [
       {path: "/", component: () => Promise.resolve().then(function() {
         return Homepage;
+      }), props: true},
+      {path: "/a", component: () => Promise.resolve().then(function() {
+        return PageA;
+      }), props: true},
+      {path: "/b", component: () => Promise.resolve().then(function() {
+        return PageB;
       }), props: true}
     ]
   });
 }
-exports.handler = async (event) => {
+const express = require("express");
+const path = require("path");
+const server = express();
+server.use("/_assets", express.static(path.join(__dirname, "../client/_assets")));
+server.get("*", (req, res) => {
   const router = createRouter$1();
   const app = vue.createSSRApp(script);
   app.use(router);
-  const html = await renderer__default["default"].renderToString(app);
-  return {
-    statusCode: 200,
-    body: `<!DOCTYPE html>
+  router.push(req.url);
+  router.isReady().then(() => {
+    if (router.currentRoute.value.matched.length === 0) {
+      res.end();
+      return;
+    }
+    (async () => {
+      const html = await renderer__default["default"].renderToString(app);
+      res.end(`<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <link rel="icon" href="/favicon.ico" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vite App</title>
-<script type="module" src="/_assets/entry-client.1a88a96f.js"></script>
+<script type="module" src="/_assets/entry-client.565dffb3.js"></script>
 <link rel="stylesheet" href="/_assets/style.366c9ed0.css">
 </head>
 <body>
@@ -1679,14 +1728,31 @@ exports.handler = async (event) => {
   
 </body>
 </html>
-`
-  };
-};
+`);
+    })();
+  });
+});
+console.log("started server...");
+server.listen(8080);
 var script$1 = {
-  name: "Homepage"
+  name: "Homepage",
+  data() {
+    return {
+      test: "prefetch is not working"
+    };
+  },
+  serverPrefetch() {
+    console.log("running prefetch hook");
+    return this.setInitialData();
+  },
+  methods: {
+    setInitialData() {
+      this.test = "prefetch is working";
+    }
+  }
 };
 function ssrRender$1(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
-  _push(`<h1${renderer.ssrRenderAttrs(_attrs)}>This is the homepage</h1>`);
+  _push(`<!--[--><h1>This is the homepage</h1><div>${renderer.ssrInterpolate($data.test)}</div><!--]-->`);
 }
 script$1.ssrRender = ssrRender$1;
 script$1.__file = "src/components/Homepage.vue";
@@ -1694,4 +1760,43 @@ var Homepage = /* @__PURE__ */ Object.freeze({
   __proto__: null,
   [Symbol.toStringTag]: "Module",
   default: script$1
+});
+var script$2 = {
+  name: "PageA",
+  props: {
+    msg: String
+  },
+  mounted() {
+    this.randomNumber = Math.random();
+  },
+  data() {
+    return {
+      randomNumber: 0,
+      initialized: false,
+      count: 0
+    };
+  }
+};
+function ssrRender$2(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<h1${renderer.ssrRenderAttrs(_attrs)}>Page A</h1>`);
+}
+script$2.ssrRender = ssrRender$2;
+script$2.__file = "src/components/PageA.vue";
+var PageA = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  default: script$2
+});
+var script$3 = {
+  name: "PageB"
+};
+function ssrRender$3(_ctx, _push, _parent, _attrs, $props, $setup, $data, $options) {
+  _push(`<h1${renderer.ssrRenderAttrs(_attrs)}>Page B</h1>`);
+}
+script$3.ssrRender = ssrRender$3;
+script$3.__file = "src/components/PageB.vue";
+var PageB = /* @__PURE__ */ Object.freeze({
+  __proto__: null,
+  [Symbol.toStringTag]: "Module",
+  default: script$3
 });
