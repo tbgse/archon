@@ -2,7 +2,6 @@ import { createSSRApp } from 'vue'
 import renderer from '@vue/server-renderer';
 import App from './App.vue'
 import createRouter from './router'
-
 const express = require('express');
 const path = require('path');
 const server = express();
