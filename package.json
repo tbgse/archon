@@ -5,7 +5,7 @@
   "scripts": {
     "test": "node build.js && node dist/server/entry-server",
     "dev": "vite",
-    "build": "node build.js",
+    "build": "node --unhandled-rejections=strict build.js",
     "build-functions": "netlify-lambda build functions-raw",
     "build-server": "node buildServer.js",
     "serve": "node functions/entry-server"

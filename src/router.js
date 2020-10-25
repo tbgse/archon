@@ -9,7 +9,7 @@ export default function (type) {
       { path: '/', component: () => import("./components/Homepage.vue"), props: true },
       { path: '/a', component: () => import("./components/PageA.vue"), props: true },
       { path: '/b', component: () => import("./components/PageB.vue"), props: true },
-      { path: '/sku/:name', component: () => import("./components/sku.vue"), props: true }
+      { path: '/sku/:name', component: () => import("./components/Sku.vue"), props: true }
     ]
   });
 }
