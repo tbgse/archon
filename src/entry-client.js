@@ -22,4 +22,4 @@ setTimeout(() => {
   router.isReady().then(() => {
     app.mount('#app', true);
   });
-}, 3000);
+}, 5000);
