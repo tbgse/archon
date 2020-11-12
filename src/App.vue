@@ -3,7 +3,7 @@
     <div v-if='ready'>Hydration complete</div>
     <div v-else>Hydrating...</div>
   </div>
-  <div>Hydration is being delayed by 3 seconds for debugging purposes</div>
+  <div>Hydration is being delayed by 5 seconds for debugging purposes</div>
   <h1>A small state test for rehydration: {{count}}</h1>
   <button @click='count++'>Add to count</button>
   <nav>
